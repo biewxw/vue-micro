@@ -1,11 +1,16 @@
 <single-spa-router>
+  <route default>
+    <h1>404 Not Found</h1>
+  </route>
   <route path="auth">
     <application name="@vuemicro/auth"></application>
   </route>
   <route path="schedule">
     <application name="@vuemicro/schedule"></application>
   </route>
-  <route path="records">
+  <route path="/records/:id">
     <application name="@vuemicro/records"></application>
   </route>
+  <redirect from="/" to="/schedule"></redirect>
+  <redirect from="/records" to="/schedule"></redirect>
 </single-spa-router>
