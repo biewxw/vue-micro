@@ -1,0 +1,39 @@
+name: "packages: on push to the main"
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: runs lerna build
+        run: npx lerna run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    strategy:
+      matrix:
+        node-version: [14.x]
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: deploy @vuemicro/auth to s3
+        uses: reggionick/s3-deploy@v3
+        with:
+          folder: packages/auth/dist
+          bucket: ${{ secrets.S3_BUCKET }}
+          bucket-region: ${{ secrets.S3_BUCKET_REGION }}
+          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}

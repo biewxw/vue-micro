@@ -1,0 +1,8 @@
+name: Build
+description: Runs build
+
+runs:
+  using: "composite"
+  steps:
+    - run: yarn && yarn build
+      shell: bash

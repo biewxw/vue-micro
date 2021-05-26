@@ -1,0 +1,8 @@
+name: Lint
+description: Runs lint
+
+runs:
+  using: "composite"
+  steps:
+    - run: yarn && yarn lint
+      shell: bash
