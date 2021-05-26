@@ -25,7 +25,7 @@ jobs:
         run: yarn
 
       - name: Runs lerna build
-        run: lerna run build && cd ./packages/auth && mkdir vuemicro-auth && mv dist/*
+        run: lerna run build
 
       - name: Deploy @vuemicro/auth to s3
         uses: jakejarvis/s3-sync-action@master
