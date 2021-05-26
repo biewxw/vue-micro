@@ -1,0 +1,20 @@
+{
+  "name": "vuemicro",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "refresh": "lerna bootstrap",
+    "clean": "lerna clean --yes && lerna exec -- rm -rf dist",
+    "initialize": "yarn && yarn run clean && yarn run refresh",
+    "build": "lerna run build --stream",
+    "root:dev": "yarn workspace @vuemicro/root run dev",
+    "auth:dev": "yarn workspace @vuemicro/auth run dev",
+    "schedule:dev": "yarn workspace @vuemicro/auth run dev",
+    "medical-records:dev": "yarn workspace @vuemicro/auth run dev"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}

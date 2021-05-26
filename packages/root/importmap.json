@@ -1,0 +1,4 @@
+{
+  "@vuemicro/root": "http://localhost:9000/root.js",
+  "@vuemicro/auth": "http://localhost:8080/js/app.js"
+}
