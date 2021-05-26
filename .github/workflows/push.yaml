@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  deployment:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -13,25 +13,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: yarn
 
       - name: Runs lerna build
         run: lerna run build
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [build]
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Install dependencies
-        run: yarn
 
       - name: Deploy @vuemicro/auth to s3
         uses: jakejarvis/s3-sync-action@master
