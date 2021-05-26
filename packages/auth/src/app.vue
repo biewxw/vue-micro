@@ -2,6 +2,21 @@
   <router-view />
 </template>
 
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
+
+export default defineComponent({
+  setup() {
+    const router = useRouter();
+
+    if (window.localStorage.getItem('AUTH:LOGGED')) {
+      router.replace('/schedule');
+    }
+  },
+});
+</script>
+
 <style lang="scss">
 #app {
   width: 100%;

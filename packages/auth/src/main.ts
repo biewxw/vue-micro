@@ -7,15 +7,8 @@ import router from './router';
 const vueLifecycles = singleSpaVue({
   createApp,
   appOptions: {
-    render() {
-      return h(App, {
-        /*
-        name: this.name,
-        mountParcel: this.mountParcel,
-        singleSpa: this.singleSpa,
-        */
-      });
-    },
+    render: () => h(App, {}),
+    router,
   },
   handleInstance(app) {
     app.use(router);
