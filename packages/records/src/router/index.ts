@@ -5,8 +5,9 @@ const RecordsView = () => import(/* webpackChunkName: "records-view" */ '@/views
 const routes: Array<RouteRecordRaw> = [
   {
     name: 'records',
-    path: '/records',
+    path: '/records/:id',
     component: RecordsView,
+    props: true,
   },
 ];
 
