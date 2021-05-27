@@ -8,6 +8,7 @@ inputs:
     default: null
 
 runs:
+  using: "composite"
   steps:
     - run: cd ${{inputs.PACKAGE_DIR}} && yarn && yarn build
       shell: bash
