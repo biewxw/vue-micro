@@ -10,5 +10,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: yarn && yarn workspace ${{ inputs.PACKAGE_NAME }} run build
+    - run: yarn && yarn build
       shell: bash
