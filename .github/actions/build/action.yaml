@@ -2,7 +2,7 @@ name: Build
 description: Runs package build
 
 inputs:
-  PACKAGE_NAME:
+  PACKAGE_DIR:
     description: "The package directory for the build execution."
     required: true
     default: null
@@ -10,5 +10,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: lerna bootstrap && yarn workspace ${{ inputs.PACKAGE_NAME }} run build
-      shell: bash
+    - run: cd ./${{ inputs.PACKAGE_DIR }}
+    - run: ls
