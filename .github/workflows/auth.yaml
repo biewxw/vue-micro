@@ -34,7 +34,7 @@ jobs:
         with:
           args: --acl public-read --delete
         env:
-          DEST_DIR: "@vuemicro/auth"
+          DEST_DIR: "@vuemicro-auth"
           SOURCE_DIR: packages/auth/dist
           AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
           AWS_REGION: ${{ secrets.S3_BUCKET_REGION }}

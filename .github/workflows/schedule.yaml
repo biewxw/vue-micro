@@ -15,17 +15,28 @@ jobs:
         node-version: [14.x]
 
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout the repository
+        uses: actions/checkout@master
 
-      - uses: actions/setup-node@v1
+      - name: Setup node with version ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: ./.github/actions/build
-        env:
-          PACKAGE_DIR: "packages/schedule"
+      - name: Install @vuemicro/schedule package dependencies
+        run: yarn workspace @vuemicro/schedule install
 
-      - uses: ./.github/actions/deploy
+      - name: Runs build for the @vuemicro/schedule package
+        run: yarn schedule:build
+
+      - name: Runs deploy for the @vuemicro/schedule package
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --delete
         env:
-          DEST_DIR: "@vuemicro-root"
-          SOURCE_DIR: "packages/schedule/dist"
+          DEST_DIR: "@vuemicro-schedule"
+          SOURCE_DIR: packages/schedule/dist
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_REGION: ${{ secrets.S3_BUCKET_REGION }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
