@@ -23,7 +23,7 @@ jobs:
 
       - uses: ./.github/actions/build
         env:
-          PACKAGE_DIR: "packages/auth"
+          PACKAGE_NAME: "@vuemicro/auth"
 
       - uses: ./.github/actions/deploy
         env:
