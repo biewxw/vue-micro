@@ -23,6 +23,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install @vuemicro/auth package dependencies
+        run: yarn workspace @vuemicro/auth install
+
       - name: Runs build for the @vuemicro/auth package
         run: yarn auth:build
 
