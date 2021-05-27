@@ -12,5 +12,5 @@ runs:
   steps:
     - run: echo ${{inputs.PACKAGE_DIR}}
       shell: bash
-    - run: cd ./${{inputs.PACKAGE_DIR}} && yarn && yarn build
-      shell: bash
+    # - run: cd ./${{inputs.PACKAGE_DIR}} && yarn && yarn build
+    #   shell: bash

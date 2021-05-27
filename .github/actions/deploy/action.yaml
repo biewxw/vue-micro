@@ -12,6 +12,7 @@ inputs:
     default: null
 
 runs:
+  using: "composite"
   steps:
     - name: Deploy ${{ DEST_DIR }} to S3
       uses: jakejarvis/s3-sync-action@master
