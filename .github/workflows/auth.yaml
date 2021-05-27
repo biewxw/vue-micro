@@ -23,7 +23,7 @@ jobs:
 
       - uses: ./.github/actions/build
         env:
-          PACKAGE_NAME: "packages/auth"
+          PACKAGE_DIR: "packages/auth"
 
       - uses: ./.github/actions/deploy
         env:
