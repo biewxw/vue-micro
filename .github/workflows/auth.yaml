@@ -15,17 +15,18 @@ jobs:
         node-version: [14.x]
 
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout the repository
+        uses: actions/checkout@master
 
-      - uses: actions/setup-node@v1
+      - name: Setup node with version ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
-      - uses: ./.github/actions/build
-        env:
-          PACKAGE_DIR: "packages/auth"
+      - name: Runs build for the @vuemicro/auth package
+        run: yarn auth:build
 
-      - uses: ./.github/actions/deploy
-        env:
-          DEST_DIR: "@vuemicro-auth"
-          SOURCE_DIR: "packages/auth/dist"
+      # - uses: ./.github/actions/deploy
+      #   env:
+      #     DEST_DIR: "@vuemicro-auth"
+      #     SOURCE_DIR: "packages/auth/dist"

@@ -11,6 +11,7 @@
     "build": "lerna run build --stream",
     "root:dev": "yarn workspace @vuemicro/root run dev",
     "auth:dev": "yarn workspace @vuemicro/auth run dev",
+    "auth:build": "yarn workspace @vuemicro/auth run build",
     "schedule:dev": "yarn workspace @vuemicro/auth run dev",
     "medical-records:dev": "yarn workspace @vuemicro/auth run dev"
   },
