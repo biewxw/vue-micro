@@ -1,0 +1,31 @@
+name: "packages: on push to the main"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/auth/**"
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - uses: ./.github/actions/build
+        env:
+          PACKAGE_DIR: "packages/auth"
+
+      - uses: ./.github/actions/deploy
+        env:
+          DEST_DIR: "@vuemicro-auth"
+          SOURCE_DIR: "packages/auth/dist"

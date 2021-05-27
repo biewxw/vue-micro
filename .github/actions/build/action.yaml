@@ -1,8 +1,13 @@
 name: Build
-description: Runs build
+description: Runs package build
+
+inputs:
+  PACKAGE_DIR:
+    description: "The package directory for the build execution."
+    required: true
+    default: null
 
 runs:
-  using: "composite"
   steps:
-    - run: yarn && yarn build
+    - run: cd ${{inputs.PACKAGE_DIR}} && yarn && yarn build
       shell: bash

@@ -1,0 +1,26 @@
+name: Deploy
+description: Deploy the package to the S3
+
+inputs:
+  DEST_DIR:
+    description: "The package destination on S3."
+    required: true
+    default: null
+  SOURCE_DIR:
+    description: "The package build folder3."
+    required: true
+    default: null
+
+runs:
+  steps:
+    - name: Deploy ${{ DEST_DIR }} to S3
+      uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --delete
+      env:
+        DEST_DIR: ${{ inputs.DEST_DIR }}
+        SOURCE_DIR: ${{inputs.SOURCE_DIR}}
+        AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        AWS_REGION: ${{ secrets.S3_BUCKET_REGION }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
