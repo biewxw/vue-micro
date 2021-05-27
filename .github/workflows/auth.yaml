@@ -1,4 +1,4 @@
-name: "packages: on push to the main"
+name: "@vuemicro/auth - build & deployment"
 
 on:
   push:
